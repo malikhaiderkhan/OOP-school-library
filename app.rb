@@ -4,7 +4,14 @@ require './person'
 require './rental'
 require './student'
 require './teacher'
-
+CHOICES = {
+  1 => :list_books,
+  2 => :list_people,
+  3 => :create_person,
+  4 => :create_book,
+  5 => :create_rental,
+  6 => :list_rentals_for_person
+}.freeze
 class App
   def initialize
     @books = []
@@ -29,7 +36,6 @@ class App
   def create_person
     puts 'Do you want to create a student (1) or a teacher (2)? [input the number]: '
     number = gets.chomp.to_i
-
     case number
     when 1
       create_student
@@ -69,7 +75,6 @@ class App
     title = gets.chomp
     print 'Author: '
     author = gets.chomp
-
     book = Book.new(title, author)
     @books << book
     puts 'Book created successfully.'
@@ -78,26 +83,20 @@ class App
   def create_rental
     display_books
     book_index = select_book
-
     if book_index.nil?
       puts 'Invalid book selection.'
       return
     end
-
     display_people
     person_index = select_person
-
     if person_index.nil?
       puts 'Invalid person selection.'
       return
     end
-
     book = @books[book_index]
     person = @people[person_index]
-
     print 'Enter rental date: '
     date = gets.chomp
-
     rental = Rental.new(date, book, person)
     @rentals << rental
     puts 'Rental created successfully.'
@@ -106,9 +105,7 @@ class App
   def list_rentals_for_person
     puts 'Enter person ID to list rentals:'
     person_id = gets.chomp.to_i
-
     person = @people.find { |p| p.id == person_id }
-
     if person
       puts "Rentals for #{person.name}:"
       person.rentals.each { |rental| puts "Book: #{rental.book.title} by #{rental.book.author}, Date: #{rental.date}" }
@@ -121,22 +118,9 @@ class App
     loop do
       display_menu
       choice = gets.chomp.to_i
-
-      case choice
-      when 1
-        list_books
-      when 2
-        list_people
-      when 3
-        create_person
-      when 4
-        create_book
-      when 5
-        create_rental
-      when 6
-        list_rentals_for_person
-      when 7
-        exit
+      exit if choice == 7
+      if CHOICES.key?(choice)
+        send(CHOICES[choice])
       else
         puts 'Invalid choice. Please try again.'
       end
@@ -181,6 +165,5 @@ class App
     (0...@people.length).include?(person_index) ? person_index : nil
   end
 end
-
 app = App.new
 app.run
