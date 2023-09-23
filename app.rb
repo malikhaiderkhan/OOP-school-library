@@ -19,7 +19,7 @@ class App
 
   def list_people
     puts 'List of People:'
-    @people.each { |person| puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
+    @people.each { |person| puts "#{person.is_a?(Student) ? ' [Student]' : ' [Teacher]'} ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
   end
 
   def create_person
@@ -64,23 +64,31 @@ class App
   end
 
   def create_rental
-    puts 'Enter rental details:'
-    print 'Date: '
-    date = gets.chomp
-    print 'Book Title: '
-    book_title = gets.chomp
-    print 'Person ID: '
-    person_id = gets.chomp.to_i
-
-    book = @books.find { |b| b.title == book_title }
-    person = @people.find { |p| p.id == person_id }
-
-    if book && person
-      rental = Rental.new(date, book, person)
-      @rentals << rental
-      puts 'Rental created successfully.'
+    puts 'List of Books:'
+    @books.each_with_index { |book, index| puts "#{index + 1}. Title: #{book.title}, Author: #{book.author}" }
+    print 'Select a book (enter the number): '
+    book_index = gets.chomp.to_i - 1
+  
+    if book_index >= 0 && book_index < @books.length
+      book = @books[book_index]
+      puts 'List of People:'
+      @people.each_with_index { |person, index| puts "#{index + 1}. ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
+      print 'Select a person (enter the number): '
+      person_index = gets.chomp.to_i - 1
+  
+      if person_index >= 0 && person_index < @people.length
+        person = @people[person_index]
+        print 'Enter rental date: '
+        date = gets.chomp
+  
+        rental = Rental.new(date, book, person)
+        @rentals << rental
+        puts 'Rental created successfully.'
+      else
+        puts 'Invalid person selection.'
+      end
     else
-      puts 'Book or person not found.'
+      puts 'Invalid book selection.'
     end
   end
 
@@ -92,7 +100,7 @@ class App
 
     if person
       puts "Rentals for #{person.name}:"
-      person.rentals.each { |rental| puts "Book: #{rental.book.title}, Date: #{rental.date}" }
+      person.rentals.each { |rental| puts "Book: #{rental.book.title} by #{rental.book.author}, Date: #{rental.date}" }
     else
       puts 'Person not found.'
     end
