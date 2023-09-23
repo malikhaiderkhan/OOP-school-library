@@ -19,7 +19,11 @@ class App
 
   def list_people
     puts 'List of People:'
-    @people.each { |person| puts "#{person.is_a?(Student) ? ' [Student]' : ' [Teacher]'} ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
+    @people.each do |person|
+      person_type = person.is_a?(Student) ? ' [Student]' : ' [Teacher]'
+      info = "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+      puts "#{person_type} #{info}"
+    end
   end
 
   def create_person
@@ -28,14 +32,27 @@ class App
 
     case number
     when 1
+      create_student
+    when 2
+      create_teacher
+    else
+      puts 'Invalid choice.'
+    end
+  end
+
+  def create_student
     print 'Name: '
     name = gets.chomp
     print 'Age: '
     age = gets.chomp.to_i
     print 'Has parent permission? [Y/N]: '
     has_parent_permission = gets.chomp.downcase == 'y'
-    person = Student.new(age, name, has_parent_permission)
-    when 2
+    person = Student.new(age, name, parent_permission: has_parent_permission)
+    @people << person
+    puts 'Student created successfully.'
+  end
+
+  def create_teacher
     print 'Name: '
     name = gets.chomp
     print 'Age: '
@@ -43,13 +60,8 @@ class App
     print 'Specialization: '
     specialization = gets.chomp
     person = Teacher.new(age, specialization, name)
-    else
-      puts 'Invalid choice.'
-      return
-    end
-
     @people << person
-    puts 'Person created successfully.'
+    puts 'Teacher created successfully.'
   end
 
   def create_book
@@ -64,32 +76,31 @@ class App
   end
 
   def create_rental
-    puts 'List of Books:'
-    @books.each_with_index { |book, index| puts "#{index + 1}. Title: #{book.title}, Author: #{book.author}" }
-    print 'Select a book (enter the number): '
-    book_index = gets.chomp.to_i - 1
-  
-    if book_index >= 0 && book_index < @books.length
-      book = @books[book_index]
-      puts 'List of People:'
-      @people.each_with_index { |person, index| puts "#{index + 1}. ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
-      print 'Select a person (enter the number): '
-      person_index = gets.chomp.to_i - 1
-  
-      if person_index >= 0 && person_index < @people.length
-        person = @people[person_index]
-        print 'Enter rental date: '
-        date = gets.chomp
-  
-        rental = Rental.new(date, book, person)
-        @rentals << rental
-        puts 'Rental created successfully.'
-      else
-        puts 'Invalid person selection.'
-      end
-    else
+    display_books
+    book_index = select_book
+
+    if book_index.nil?
       puts 'Invalid book selection.'
+      return
     end
+
+    display_people
+    person_index = select_person
+
+    if person_index.nil?
+      puts 'Invalid person selection.'
+      return
+    end
+
+    book = @books[book_index]
+    person = @people[person_index]
+
+    print 'Enter rental date: '
+    date = gets.chomp
+
+    rental = Rental.new(date, book, person)
+    @rentals << rental
+    puts 'Rental created successfully.'
   end
 
   def list_rentals_for_person
@@ -108,16 +119,7 @@ class App
 
   def run
     loop do
-      puts ' '
-      puts 'Please choose an option by entering a number:'
-      puts '1. List all books'
-      puts '2. List all people'
-      puts '3. Create a person'
-      puts '4. Create a book'
-      puts '5. Create a rental'
-      puts '6. List all rentals for a given person ID'
-      puts '7. Quit'
-
+      display_menu
       choice = gets.chomp.to_i
 
       case choice
@@ -140,8 +142,45 @@ class App
       end
     end
   end
+
+  private
+
+  def display_menu
+    puts ' '
+    puts 'Please choose an option by entering a number:'
+    puts '1. List all books'
+    puts '2. List all people'
+    puts '3. Create a person'
+    puts '4. Create a book'
+    puts '5. Create a rental'
+    puts '6. List all rentals for a given person ID'
+    puts '7. Quit'
+  end
+
+  def display_books
+    puts 'List of Books:'
+    @books.each_with_index { |book, index| puts "#{index + 1}. Title: #{book.title}, Author: #{book.author}" }
+  end
+
+  def select_book
+    print 'Select a book (enter the number): '
+    book_index = gets.chomp.to_i - 1
+    (0...@books.length).include?(book_index) ? book_index : nil
+  end
+
+  def display_people
+    puts 'List of People:'
+    @people.each_with_index do |person, index|
+      puts "#{index + 1}. ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+    end
+  end
+
+  def select_person
+    print 'Select a person (enter the number): '
+    person_index = gets.chomp.to_i - 1
+    (0...@people.length).include?(person_index) ? person_index : nil
+  end
 end
 
-# Create an instance of the App class and run the application
 app = App.new
 app.run
