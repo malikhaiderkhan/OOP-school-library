@@ -70,7 +70,6 @@ Example commands:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **add basic UI**
 - [ ] **refactor the code**
 - [ ] **preserve data**
 - [ ] **unit tests**
