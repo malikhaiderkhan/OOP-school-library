@@ -73,12 +73,17 @@ Example commands:
 - Linkedin: [@in/bleu-yves](https://www.linkedin.com/in/bleu-yves/)
 - GitHub: [@bleuYves](https://twitter.com/bleuYves)
 
+👤 **Devendra-alt**
+
+- GitHub: [@devendra-alt](https://github.com/devendra-alt)
+- Twitter: [@Devendra5101](https://twitter.com/Devendra5101)
+- LinkedIn: [Devendra Mulewa](https://linkedin.com/in/devendramulewa)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **refactor the code**
 - [ ] **preserve data**
 - [ ] **unit tests**
 
