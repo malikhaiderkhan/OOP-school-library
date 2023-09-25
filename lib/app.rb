@@ -103,7 +103,7 @@ class App
   def list_rentals_for_person
     puts 'Enter person ID to list rentals:'
     person_id = gets.chomp.to_i
-    person = @people.find {|p| p.id == person_id }
+    person = @people.find { |p| p.id == person_id }
     if person
       puts "Rentals for #{person.name}:"
       person.rentals.each { |rental| puts "Book: #{rental.book.title} by #{rental.book.author}, Date: #{rental.date}" }
@@ -141,7 +141,7 @@ class App
 
   def display_books
     puts 'List of Books:'
-    @books.each_with_index {|book, index| puts "#{index + 1}. Title: #{book.title}, Author: #{book.author}"}
+    @books.each_with_index { |book, index| puts "#{index + 1}. Title: #{book.title}, Author: #{book.author}" }
   end
 
   def select_book
