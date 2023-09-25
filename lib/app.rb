@@ -69,9 +69,9 @@ class App
   end
 
   def create_book
-    print 'Title: '
+    print 'Title:'
     title = gets.chomp
-    print 'Author: '
+    print 'Author:'
     author = gets.chomp
     book = Book.new(title, author)
     @books << book
@@ -103,7 +103,7 @@ class App
   def list_rentals_for_person
     puts 'Enter person ID to list rentals:'
     person_id = gets.chomp.to_i
-    person = @people.find { |p| p.id == person_id }
+    person = @people.find {|p| p.id == person_id }
     if person
       puts "Rentals for #{person.name}:"
       person.rentals.each { |rental| puts "Book: #{rental.book.title} by #{rental.book.author}, Date: #{rental.date}" }
@@ -141,11 +141,11 @@ class App
 
   def display_books
     puts 'List of Books:'
-    @books.each_with_index { |book, index| puts "#{index + 1}. Title: #{book.title}, Author: #{book.author}" }
+    @books.each_with_index {|book, index| puts "#{index + 1}. Title: #{book.title}, Author: #{book.author}"}
   end
 
   def select_book
-    print 'Select a book (enter the number): '
+    print 'Select a book (enter the number):'
     book_index = gets.chomp.to_i - 1
     (0...@books.length).include?(book_index) ? book_index : nil
   end
@@ -158,7 +158,7 @@ class App
   end
 
   def select_person
-    print 'Select a person (enter the number): '
+    print 'Select a person (enter the number):'
     person_index = gets.chomp.to_i - 1
     (0...@people.length).include?(person_index) ? person_index : nil
   end
