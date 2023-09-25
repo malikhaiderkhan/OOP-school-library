@@ -1,17 +1,10 @@
-require './book'
-require './classroom'
-require './person'
-require './rental'
-require './student'
-require './teacher'
-CHOICES = {
-  1 => :list_books,
-  2 => :list_people,
-  3 => :create_person,
-  4 => :create_book,
-  5 => :create_rental,
-  6 => :list_rentals_for_person
-}.freeze
+require_relative 'book'
+require_relative 'classroom'
+require_relative 'person'
+require_relative 'rental'
+require_relative 'student'
+require_relative 'teacher'
+
 class App
   def initialize
     @books = []
@@ -27,9 +20,7 @@ class App
   def list_people
     puts 'List of People:'
     @people.each do |person|
-      person_type = person.is_a?(Student) ? ' [Student]' : ' [Teacher]'
-      info = "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
-      puts "#{person_type} #{info}"
+      puts "[#{person.class}], ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
     end
   end
 
@@ -54,7 +45,7 @@ class App
     print 'Has parent permission? [Y/N]: '
     has_parent_permission = gets.chomp.downcase == 'y'
     person = Student.new(age, name, parent_permission: has_parent_permission)
-    @people << person
+    @people.push(person)
     puts 'Student created successfully.'
   end
 
@@ -66,17 +57,17 @@ class App
     print 'Specialization: '
     specialization = gets.chomp
     person = Teacher.new(age, specialization, name)
-    @people << person
+    @people.push(person)
     puts 'Teacher created successfully.'
   end
 
   def create_book
-    print 'Title: '
+    print 'Title:'
     title = gets.chomp
-    print 'Author: '
+    print 'Author:'
     author = gets.chomp
     book = Book.new(title, author)
-    @books << book
+    @books.push(book)
     puts 'Book created successfully.'
   end
 
@@ -98,7 +89,7 @@ class App
     print 'Enter rental date: '
     date = gets.chomp
     rental = Rental.new(date, book, person)
-    @rentals << rental
+    @rentals.push(rental)
     puts 'Rental created successfully.'
   end
 
@@ -114,32 +105,7 @@ class App
     end
   end
 
-  def run
-    loop do
-      display_menu
-      choice = gets.chomp.to_i
-      exit if choice == 7
-      if CHOICES.key?(choice)
-        send(CHOICES[choice])
-      else
-        puts 'Invalid choice. Please try again.'
-      end
-    end
-  end
-
   private
-
-  def display_menu
-    puts ' '
-    puts 'Please choose an option by entering a number:'
-    puts '1. List all books'
-    puts '2. List all people'
-    puts '3. Create a person'
-    puts '4. Create a book'
-    puts '5. Create a rental'
-    puts '6. List all rentals for a given person ID'
-    puts '7. Quit'
-  end
 
   def display_books
     puts 'List of Books:'
@@ -147,7 +113,7 @@ class App
   end
 
   def select_book
-    print 'Select a book (enter the number): '
+    print 'Select a book (enter the number):'
     book_index = gets.chomp.to_i - 1
     (0...@books.length).include?(book_index) ? book_index : nil
   end
@@ -160,10 +126,8 @@ class App
   end
 
   def select_person
-    print 'Select a person (enter the number): '
+    print 'Select a person (enter the number):'
     person_index = gets.chomp.to_i - 1
     (0...@people.length).include?(person_index) ? person_index : nil
   end
 end
-app = App.new
-app.run

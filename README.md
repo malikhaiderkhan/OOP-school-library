@@ -1,17 +1,18 @@
 # 📗 Table of Contents
 
-- [📖 About the Project](#about-project)
-  - [🛠 Built With](#built-with)
-    - [Tech Stack](#tech-stack)
-    - [Key Features](#key-features)
-- [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
-- [👥 Authors](#authors)
-- [🔭 Future Features](#future-features)
-- [🤝 Contributing](#contributing)
-- [⭐️ Show your support](#support)
-- [🙏 Acknowledgements](#acknowledgements)
-- [📝 License](#license)
+- [� Table of Contents](#-table-of-contents)
+- [📖 SCHOOL LIBRARAY ](#-school-libraray-)
+  - [🛠 Built With ](#-built-with-)
+    - [Tech Stack ](#tech-stack-)
+    - [Key Features ](#key-features-)
+  - [💻 Getting Started ](#-getting-started-)
+    - [Setup](#setup)
+  - [👥 Authors ](#-authors-)
+  - [🔭 Future Features ](#-future-features-)
+  - [🤝 Contributing ](#-contributing-)
+  - [⭐️ Show your support ](#️-show-your-support-)
+  - [🙏 Acknowledgments ](#-acknowledgments-)
+  - [📝 License ](#-license-)
 
 <!-- PROJECT DESCRIPTION -->
 
@@ -66,11 +67,23 @@ Example commands:
 - Twitter: [@malikhaiderkha](https://twitter.com/malikhaiderkha)
 - LinkedIn: [@malikhaiderkhan](https://www.linkedin.com/in/malik-haider-khan-b53188140)
 
+👤 **Bleu Yves Sopoude (MrBlue)**
+
+- GitHub: [@Bleu-Yves-Sopoude](https://github.com/Bleu-Yves-Sopoude)
+- Linkedin: [@in/bleu-yves](https://www.linkedin.com/in/bleu-yves/)
+- GitHub: [@bleuYves](https://twitter.com/bleuYves)
+
+👤 **Devendra-alt**
+
+- GitHub: [@devendra-alt](https://github.com/devendra-alt)
+- Twitter: [@Devendra5101](https://twitter.com/Devendra5101)
+- LinkedIn: [Devendra Mulewa](https://linkedin.com/in/devendramulewa)
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **refactor the code**
 - [ ] **preserve data**
 - [ ] **unit tests**
 
