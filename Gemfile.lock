@@ -32,6 +32,7 @@ GEM
 
 PLATFORMS
   x64-mingw-ucrt
+  x86_64-darwin-17
 
 DEPENDENCIES
   rubocop (>= 1.0, < 2.0)
