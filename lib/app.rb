@@ -5,9 +5,12 @@ require_relative 'person'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'i_o'
+require 'pry'
 
-class App
+class App < IOFILE
   def initialize
+    super()
     @books = []
     if File.exist?('books.json') && File.size('books.json').positive?
       JSON.parse(File.read('books.json')).each do |book|
@@ -15,7 +18,10 @@ class App
       end
     end
 
-    @people = []
+    @people = from_json('people.json')
+
+    # binding.pry
+
     @rentals = []
   end
 
@@ -113,13 +119,14 @@ class App
   end
 
   def save_to_file
+    to_json(@people, 'people.json')
+    puts @people
     books = []
     File.open('books.json', 'w') do |file|
       @books.each do |book|
         bk = { title: book.title, author: book.author }
         books.push(bk)
       end
-
       file.write(books.to_json)
     end
   end

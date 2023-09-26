@@ -1,0 +1,16 @@
+[
+  {
+    "type": "Student",
+    "age": 31,
+    "name": "dev",
+    "parent_permission": {
+      "parent_permission": true
+    },
+    "rentals": [
+      {
+        "date": "12/12/12",
+        "book": "#<Book:0x000002ad27912e00>"
+      }
+    ]
+  }
+]
