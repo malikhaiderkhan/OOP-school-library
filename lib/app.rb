@@ -9,12 +9,6 @@ require_relative 'teacher'
 class App
   def initialize
     @books = []
-    if File.exist?('books.json') && File.size('books.json').positive?
-      JSON.parse(File.read('books.json')).each do |book|
-        @books << Book.new(book['title'], book['author'])
-      end
-    end
-
     @people = []
     @rentals = []
   end
@@ -22,6 +16,7 @@ class App
   def list_books
     puts 'List of Books:'
     @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
+    books.to_json
   end
 
   def list_people
@@ -109,18 +104,6 @@ class App
       person.rentals.each { |rental| puts "Book: #{rental.book.title} by #{rental.book.author}, Date: #{rental.date}" }
     else
       puts 'Person not found.'
-    end
-  end
-
-  def save_to_file
-    books = []
-    File.open('books.json', 'w') do |file|
-      @books.each do |book|
-        bk = { title: book.title, author: book.author }
-        books.push(bk)
-      end
-
-      file.write(books.to_json)
     end
   end
 
