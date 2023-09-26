@@ -1,4 +1,5 @@
 require_relative 'lib/app'
+require 'json'
 
 def display_menu
   puts ' '
@@ -37,6 +38,7 @@ def main
     display_menu
     choice = gets.chomp.to_i
     if choice == 7
+      app.save_to_file
       exit
     else
       menu_choice(choice, app)
