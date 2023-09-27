@@ -1,15 +1,24 @@
+require 'json'
 require_relative 'book'
 require_relative 'classroom'
 require_relative 'person'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'i_o'
+require 'pry'
 
-class App
+class App < IOFILE
   def initialize
+    super()
     @books = []
-    @people = []
-    @rentals = []
+    if File.exist?('books.json') && File.size('books.json').positive?
+      JSON.parse(File.read('books.json')).each do |book|
+        @books << Book.new(book['title'], book['author'])
+      end
+    end
+    @people = from_json('people.json')
+    @rentals = from_json('rentals.json')
   end
 
   def list_books
@@ -44,7 +53,7 @@ class App
     age = gets.chomp.to_i
     print 'Has parent permission? [Y/N]: '
     has_parent_permission = gets.chomp.downcase == 'y'
-    person = Student.new(age, name, parent_permission: has_parent_permission)
+    person = Student.new(age, has_parent_permission, name)
     @people.push(person)
     puts 'Student created successfully.'
   end
@@ -102,6 +111,20 @@ class App
       person.rentals.each { |rental| puts "Book: #{rental.book.title} by #{rental.book.author}, Date: #{rental.date}" }
     else
       puts 'Person not found.'
+    end
+  end
+
+  def save_to_file
+    to_json(@people, 'people.json')
+    to_json(@rentals, 'rentals.json')
+    puts @people
+    books = []
+    File.open('books.json', 'w') do |file|
+      @books.each do |book|
+        bk = { title: book.title, author: book.author }
+        books.push(bk)
+      end
+      file.write(books.to_json)
     end
   end
 
