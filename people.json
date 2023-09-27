@@ -1,1 +1,21 @@
-[{"type":"Student","age":31,"name":"dev","parent_permission":{"parent_permission":true},"rentals":[]},{"type":"Teacher","age":24,"specialization":"tst","name":"test","rentals":[{"date":"2023/02/01","book":"#<Book:0x00000257413edb50>"},{"date":"2023/02/01","book":"#<Book:0x00000257413edb50>"},{"date":"2023/02/01","book":"#<Book:0x00000257413edb50>"}]}]
+[
+  {
+    "type": "Student",
+    "age": 21,
+    "name": "dev",
+    "parent_permission": true,
+    "rentals": [
+      {
+        "date": "12/12/12",
+        "book": "#<Book:0x00000257a85b2de8>"
+      }
+    ]
+  },
+  {
+    "type": "Teacher",
+    "age": 23,
+    "specialization": "comp",
+    "name": "ha",
+    "rentals": []
+  }
+]

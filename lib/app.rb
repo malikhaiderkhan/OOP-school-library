@@ -20,9 +20,11 @@ class App < IOFILE
 
     @people = from_json('people.json')
 
-    # binding.pry
+    @people = []
+
 
     @rentals = from_json('rentals.json')
+    # binding.pry
   end
 
   def list_books
@@ -57,7 +59,7 @@ class App < IOFILE
     age = gets.chomp.to_i
     print 'Has parent permission? [Y/N]: '
     has_parent_permission = gets.chomp.downcase == 'y'
-    person = Student.new(age, name, parent_permission: has_parent_permission)
+    person = Student.new(age, has_parent_permission, name)
     @people.push(person)
     puts 'Student created successfully.'
   end
