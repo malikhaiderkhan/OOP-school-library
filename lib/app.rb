@@ -18,7 +18,6 @@ class App < IOFILE
       end
     end
     @people = from_json('people.json')
-    @people = []
     @rentals = from_json('rentals.json')
   end
 

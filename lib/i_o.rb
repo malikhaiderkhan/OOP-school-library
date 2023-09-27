@@ -22,8 +22,10 @@ class IOFILE
                               end
         elsif name == 'rentals.json'
           book = Book.new(element['book']['title'], element['book']['author'])
-          person = Person.new(element['person']['name'],
-                              element['person']['age'])
+          person = Person.new(
+                              element['person']['name'],
+                              element['person']['age']
+                            )
           object_container << Rental.new(element['date'], book, person)
         end
       end
@@ -44,11 +46,13 @@ class IOFILE
     if element.is_a?(Student)
       { type: 'Student', age: element.age, name: element.name,
         parent_permission: element.parent_permission,
-        rentals: rentals_data_stream }
+        rentals: rentals_data_stream
+      }
     else
       { type: 'Teacher', age: element.age, specialization:
-                      element.specialization, name: element.name,
-        rentals: rentals_data_stream }
+        element.specialization, name: element.name,
+        rentals: rentals_data_stream
+      }
     end
   end
 
@@ -60,9 +64,16 @@ class IOFILE
           data_stream_object_container.push(person_stream(element))
         elsif name == 'rentals.json'
           book = { author: element.book.author, title: element.book.title }
-          person = { id: element.person.id, title: element.person.name, age: element.person.age,
-                     parent_permission: element.person.parent_permission }
-          data_stream_object_container.push({ date: element.date, book: book, person: person })
+          person = {
+                    id: element.person.id, title: element.person.name,
+                    age: element.person.age,
+                    parent_permission: element.person.parent_permission
+                   }
+          data_stream_object_container.push({
+            date: element.date,
+            book: book,
+            person: person
+            })
         end
       end
       file.write(data_stream_object_container.to_json)
