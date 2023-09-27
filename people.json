@@ -1,16 +1,1 @@
-[
-  {
-    "type": "Student",
-    "age": 31,
-    "name": "dev",
-    "parent_permission": {
-      "parent_permission": true
-    },
-    "rentals": [
-      {
-        "date": "12/12/12",
-        "book": "#<Book:0x000002ad27912e00>"
-      }
-    ]
-  }
-]
+[{"type":"Student","age":31,"name":{"parent_permission":true},"parent_permission":"dev","rentals":[]},{"type":"Teacher","age":24,"specialization":"tst","name":"test","rentals":[{"date":"2023/12/02","book":"#<Book:0x000001f05fc1d990>"}]}]

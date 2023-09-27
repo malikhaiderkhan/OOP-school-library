@@ -1,6 +1,7 @@
 require 'json'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'rental'
 require 'pry'
 class IOFILE
   def file_exist?(name)
