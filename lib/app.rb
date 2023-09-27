@@ -17,14 +17,9 @@ class App < IOFILE
         @books << Book.new(book['title'], book['author'])
       end
     end
-
     @people = from_json('people.json')
-
     @people = []
-
-
     @rentals = from_json('rentals.json')
-    # binding.pry
   end
 
   def list_books
