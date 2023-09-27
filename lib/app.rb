@@ -22,7 +22,7 @@ class App < IOFILE
 
     # binding.pry
 
-    @rentals = []
+    @rentals = from_json('rentals.json')
   end
 
   def list_books
@@ -120,6 +120,7 @@ class App < IOFILE
 
   def save_to_file
     to_json(@people, 'people.json')
+    to_json(@rentals, 'rentals.json')
     puts @people
     books = []
     File.open('books.json', 'w') do |file|
