@@ -33,5 +33,5 @@ RSpec.describe Book do
       expect(rental.book).to eq(book)
       expect(rental.person).to eq(person)
     end
-end
+  end
 end
