@@ -19,13 +19,13 @@ RSpec.describe Teacher do
       expect(teacher.age).to eq(26)
       expect(teacher.specialization).to eq('Ruby')
     end
-end
-
-describe '#can_use_service?' do
-  it 'can always use services' do
-    teacher = Teacher.new(26, 'Ruby')
-
-    expect(teacher.can_use_services?).to be_truthy
   end
-end
+
+  describe '#can_use_service?' do
+    it 'can always use services' do
+      teacher = Teacher.new(26, 'Ruby')
+
+      expect(teacher.can_use_services?).to be_truthy
+    end
+  end
 end
