@@ -9,7 +9,7 @@ describe Classroom do
     end
 
     it 'should have a label' do
-      classroom = Classroom.new('world')
+      classroom = Classroom.new('World')
       expect(classroom.label).to eq('World')
     end
 
