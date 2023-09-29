@@ -84,8 +84,7 @@ Example commands:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **preserve data**
-- [ ] **unit tests**
+- [ ] **Front-end UI**
 
 <!-- CONTRIBUTING -->
 
