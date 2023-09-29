@@ -20,10 +20,8 @@ describe Classroom do
 
     it 'should add a student to the classroom' do
       classroom = Classroom.new('World')
-      student = Student.new(1, 'bucmister', true) # Create a sample student
-
-      classroom.students = student
-
+      student = Student.new(1, 'bucmister', true)
+      classroom.add_student(student)
       expect(classroom.students).to include(student)
       expect(student.classroom).to eq(classroom)
     end
